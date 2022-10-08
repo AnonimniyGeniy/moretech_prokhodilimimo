@@ -21,7 +21,6 @@ class RbcParser:
                               "text": self.get_article_data(soupchik["href"])}
                              for soupchik in soup.find_all("a", {"class": "item__link"})])
 
-
     def get_article_data(self, url: str):
         """
         Возвращает описание и текст статьи по ссылке
@@ -54,8 +53,6 @@ class RbcParser:
 
         while offset < limit:
             request_params["offset"] = offset
-
-
             print(f'Parsing articles from {offset} to {offset+step}')
             out = pd.concat([out, self.get_search_table(request_params)], ignore_index=True)
             print(f"Total news: {len(out)}")
@@ -76,11 +73,11 @@ if __name__ == "__main__":
             'step': 12
         }
     parser = RbcParser()
-    table = pd.DataFrame()
-    for category in ["economics", "business", "finances", "technology_and_media"]:
+    #table = pd.DataFrame()
+    for category in ["economics", "business", "finances", "technology_and_media", "politics"]:
         param_dict["category"] = category
 
         print("param_dict:", param_dict)
 
-        table = pd.concat([table, parser.get_articles(param_dict=param_dict)], ignore_index=True)
-    table.to_csv("rbk_news.csv")
+        parser.get_articles(param_dict=param_dict).to_csv(f"rbk_{category}.csv")
+    #table.to_csv("rbk_news.csv")
