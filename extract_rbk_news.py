@@ -77,11 +77,10 @@ if __name__ == "__main__":
         }
     parser = RbcParser()
     table = pd.DataFrame()
-    for category in ["economics", "business", "finance", "technology_and_media"]:
+    for category in ["economics", "business", "finances", "technology_and_media"]:
         param_dict["category"] = category
 
         print("param_dict:", param_dict)
-
 
         table = pd.concat([table, parser.get_articles(param_dict=param_dict)], ignore_index=True)
     table.to_csv("rbk_news.csv")
