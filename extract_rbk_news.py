@@ -29,15 +29,7 @@ class RbcParser:
         r = rq.get(url)
         soup = bs(r.text, features="lxml")
 
-
-        text = None
-        p_text = soup.find_all('p')
-        if p_text:
-            text = ' '.join(map(lambda x:
-                                x.text.replace('<br />','\n').strip(),
-                                p_text))
-
-        return text
+        return ' '.join(' '.join([i.text for i in soup.find_all('p')]).split())
 
     def get_articles(self, param_dict) -> pd.DataFrame:
         """
@@ -80,13 +72,16 @@ if __name__ == "__main__":
         {
             'category': 'business',
             'offset': 0,
-            'limit': 30,
+            'limit': 50,
             'step': 12
         }
-
-    print("param_dict:", param_dict)
-
     parser = RbcParser()
+    table = pd.DataFrame()
+    for category in ["economics", "business", "finance", "technology_and_media"]:
+        param_dict["category"] = category
 
-    table = parser.get_articles(param_dict=param_dict)
-    table.to_csv("rbk_last_news.csv")
+        print("param_dict:", param_dict)
+
+
+        table = pd.concat([table, parser.get_articles(param_dict=param_dict)], ignore_index=True)
+    table.to_csv("rbk_news.csv")
