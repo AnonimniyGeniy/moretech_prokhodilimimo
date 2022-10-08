@@ -2,7 +2,7 @@ import requests as rq
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 
-class rbc_parser:
+class RbcParser:
     def __init__(self):
         pass
 
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     print("param_dict:", param_dict)
 
-    parser = rbc_parser()
+    parser = RbcParser()
     tbl = parser.get_search_table(param_dict,
                                   include_text=True) # Парсить текст статей
 
