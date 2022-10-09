@@ -1,18 +1,14 @@
 import json
+import random
 import pandas as pd
-import numpy as np
-#from pipeline import TextPipeline
 
-def save_json(data):
-    with open('rbk_data1.json', "w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
     try:
         from pipeline import TextPipeline
         pipe = TextPipeline.TextProcessingPipeline("../pipeline/model.pt", 'cpu')
     except Exception as e:
-        pipe = lambda x: ("Empty", 0.5, 0.5, 0.0)
+        pipe = lambda x: ("Empty", random.random(), random.random(), 0.0)
     df = pd.read_csv("../merged_data.csv", index_col=0)
     count = 0
     items = list()
