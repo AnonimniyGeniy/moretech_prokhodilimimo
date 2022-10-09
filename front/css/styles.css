@@ -1,0 +1,9 @@
+#image_navbar{
+    height: 60px;
+    width: auto;
+    align-items: right;
+}
+#navbar{
+    align-items: center;
+    display: flex;
+}

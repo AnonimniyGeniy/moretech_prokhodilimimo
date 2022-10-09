@@ -20,5 +20,5 @@ if __name__ == "__main__":
         summary, economist, director, trash = pipe(df["text"][i])
         items.append(dict(href=df["link"][i], title=df["title"][i], text=summary, relevant={"buh": economist, "dir": director, "trash": trash}))
 
-    with open("../done_data.json", "w", encoding="utf-8") as file:
+    with open("../front/data/done_data.json", "w", encoding="utf-8") as file:
         json.dump({"count": count, "items": items}, file, ensure_ascii=False, indent=4)
