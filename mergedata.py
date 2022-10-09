@@ -38,5 +38,5 @@ for i in range(len(ftrash)):
     #print(fb['link'][i])
     sp.append([ftrash['href'][i], ftrash['text'][i], ftrash['title'][i], 3])
 
-newdata = pd.DataFrame(data=sp)
+newdata = pd.DataFrame(data=sp, columns=["link", "text", "title", "category"])
 newdata.to_csv("merged_data.csv")
