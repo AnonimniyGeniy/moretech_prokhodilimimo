@@ -17,7 +17,7 @@ class RbcParser:
         """
         soup = bs(rq.get("https://www.rbc.ru/v10/ajax/get-news-by-filters/", param_dict).json()["html"], "lxml")
         return pd.DataFrame([{"title": ' '.join(soupchik.find("span", {"class": "item__title rm-cm-item-text"}).text.split()),
-                              "href": soupchik["href"],
+                              "link": soupchik["href"],
                               "text": self.get_article_data(soupchik["href"])}
                              for soupchik in soup.find_all("a", {"class": "item__link"})])
 
@@ -73,11 +73,10 @@ if __name__ == "__main__":
             'step': 12
         }
     parser = RbcParser()
-    #table = pd.DataFrame()
+
     for category in ["economics", "business", "finances", "technology_and_media", "politics"]:
         param_dict["category"] = category
 
         print("param_dict:", param_dict)
 
-        parser.get_articles(param_dict=param_dict).to_csv(f"parced_data/rbk_{category}.csv")
-    #table.to_csv("rbk_news.csv")
+        parser.get_articles(param_dict=param_dict).to_csv(f"../parced_data/rbk_{category}.csv")

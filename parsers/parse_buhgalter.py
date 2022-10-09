@@ -60,7 +60,7 @@ def main():
         # Заполняем полученными данными news_data
         news_data[name]['text'] = " ".join(article_text.split())
 
-    pd.DataFrame(news_data).transpose().reset_index(drop=True).to_csv("buh_data.csv")
+    pd.DataFrame(news_data).transpose().reset_index(drop=True).to_csv("../parced_data/buh_data.csv")
 
 
 if __name__ == "__main__":
