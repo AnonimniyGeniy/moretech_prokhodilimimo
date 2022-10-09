@@ -79,5 +79,5 @@ if __name__ == "__main__":
 
         print("param_dict:", param_dict)
 
-        parser.get_articles(param_dict=param_dict).to_csv(f"rbk_{category}.csv")
+        parser.get_articles(param_dict=param_dict).to_csv(f"parced_data/rbk_{category}.csv")
     #table.to_csv("rbk_news.csv")
