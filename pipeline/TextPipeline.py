@@ -1,9 +1,7 @@
 from transformers import MBartTokenizer, MBartForConditionalGeneration
-from transformers import BertForMaskedLM,BertTokenizer, pipeline
-import torch.utils.data as data
+from transformers import BertForMaskedLM, BertTokenizer, pipeline
 import torch
 import torch.nn as nn
-import numpy as np
 
 #Summarization pipeline
 class SummarizationPipeline:
@@ -85,6 +83,6 @@ class TextProcessingPipeline:
         cat = self.classificator(embs)
         return summary_text, cat[0], cat[1], cat[2]
 
-#pipe = TextProcessingPipeline("/content/model.pt", 'cpu')
+#pipe = TextProcessingPipeline("model.pt", 'cpu')
 
 #summary, economist, director, trash = pipe(news)

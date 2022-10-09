@@ -16,8 +16,8 @@ class RbcParser:
         ### Если True, статьи возвращаются с текстами
         """
         soup = bs(rq.get("https://www.rbc.ru/v10/ajax/get-news-by-filters/", param_dict).json()["html"], "lxml")
-        return pd.DataFrame([{"title": ' '.join(soupchik.find("span", {"class": "item__title rm-cm-item-text"}).text.split()),
-                              "link": soupchik["href"],
+        return pd.DataFrame([{"link": soupchik["href"],
+                              "title": " ".join(soupchik.find("span", {"class": "item__title rm-cm-item-text"}).text.split()),
                               "text": self.get_article_data(soupchik["href"])}
                              for soupchik in soup.find_all("a", {"class": "item__link"})])
 
